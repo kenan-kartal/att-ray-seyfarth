@@ -1,0 +1,6 @@
+= AT&T Syntax implementation of Ray Seyfarth's Assembly Book
+
+This repository contains the AT&T syntax implementation of the x86-64 code
+from Ray Seyfarth's _Introduction to 64 Bit Intel Assembly Language Programming for Linux_ (2011).
+Make files for building and testing are included.
+
