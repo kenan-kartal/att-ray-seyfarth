@@ -26,6 +26,10 @@ build/add: src/06_02-add.s
 	as -o build/add.o src/06_02-add.s
 	gcc -no-pie -o build/add build/add.o
 
+.PHONY: clean
+clean:
+	-rm -rf build
+
 test-exit:
 	build/exit; echo $$?
 test-numbers:
