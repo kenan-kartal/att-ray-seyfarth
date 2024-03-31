@@ -1,5 +1,5 @@
 all: exit numbers memory mov-reg add\
-	sub
+	sub mult
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -7,6 +7,7 @@ memory: build build/memory
 mov-reg: build build/mov-reg
 add: build build/add
 sub: build build/sub
+mult: build build/mult
 
 build:
 	mkdir build
@@ -30,6 +31,9 @@ build/add: src/06_02-add.s
 build/sub: src/06_03-sub.s
 	as -o build/sub.o src/06_03-sub.s
 	gcc -no-pie -o build/sub build/sub.o
+build/mult: src/06_04-mult.s
+	as -o build/mult.o src/06_04-mult.s
+	gcc -no-pie -o build/mult build/mult.o
 
 .PHONY: clean
 clean:
@@ -48,4 +52,6 @@ test-add:
 	build/add; echo $$?
 test-sub:
 	build/sub; echo $$?
+test-mult:
+	build/mult; echo $$?
 
