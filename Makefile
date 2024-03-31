@@ -1,5 +1,5 @@
 all: exit numbers memory mov-reg add\
-	sub mult div cond-mov
+	sub mult div cond-mov bit-ops
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -10,6 +10,7 @@ sub: build build/sub
 mult: build build/mult
 div: build build/div
 cond-mov: build build/cond-mov
+bit-ops: build build/bit-ops
 
 build:
 	mkdir build
@@ -42,6 +43,9 @@ build/div: src/06_05-div.s
 build/cond-mov: src/06_06-cond-mov.s
 	as -o build/cond-mov.o src/06_06-cond-mov.s
 	gcc -no-pie -o build/cond-mov build/cond-mov.o
+build/bit-ops: src/07-bit-ops.s
+	as -o build/bit-ops.o src/07-bit-ops.s
+	gcc -no-pie -o build/bit-ops build/bit-ops.o
 
 .PHONY: clean
 clean:
@@ -66,4 +70,6 @@ test-div:
 	build/div; echo $$?
 test-cond-mov:
 	build/cond-mov; echo $$?
+test-bit-ops:
+	build/bit-ops; echo $$?
 
