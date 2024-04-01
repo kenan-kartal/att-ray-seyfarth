@@ -9,8 +9,8 @@ main:
         push %rbp
         mov %rsp, %rbp
         sub $16, %rsp
-        mov $0, %rax
         ### Not operation ###
+        mov $0, %rax
         not %rax                # rax == 0xffffffffffffffff
         mov $0, %rdx            # prepare for divide
         mov $15, %rbx           # will divide by 15 (0xf)
