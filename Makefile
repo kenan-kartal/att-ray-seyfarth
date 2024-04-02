@@ -1,6 +1,6 @@
 all: exit numbers memory mov-reg add\
 	sub mult div cond-mov bit-ops\
-	uncnd-jmp loop
+	uncnd-jmp loop loop2
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -14,6 +14,7 @@ cond-mov: build build/cond-mov
 bit-ops: build build/bit-ops
 uncnd-jmp: build build/uncnd-jmp
 loop: build build/loop
+loop2: build build/loop2
 
 build:
 	mkdir build
@@ -55,6 +56,9 @@ build/uncnd-jmp: src/08_01-uncnd-jmp.s
 build/loop: src/08_03-loop.s
 	as -o build/loop.o src/08_03-loop.s
 	gcc -no-pie -o build/loop build/loop.o
+build/loop2: src/08_03-loop2.s
+	as -o build/loop2.o src/08_03-loop2.s
+	gcc -no-pie -o build/loop2 build/loop2.o
 
 .PHONY: clean
 clean:
@@ -85,4 +89,6 @@ test-uncnd-jmp:
 	build/uncnd-jmp; echo $$?
 test-loop:
 	build/loop; echo $$?
+test-loop2:
+	build/loop2; echo $$?
 
