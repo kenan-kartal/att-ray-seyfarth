@@ -1,7 +1,6 @@
 # Function call
 .section .data
-msg:    .ascii "Hello World!"
-        .byte 0x0a, 0
+msg:    .asciz "Hello World!\n"
 .section .text
 .global main
 main:
