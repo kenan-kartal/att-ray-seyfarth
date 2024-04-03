@@ -1,6 +1,7 @@
 all: exit numbers memory mov-reg add\
 	sub mult div cond-mov bit-ops\
-	uncnd-jmp loop loop2 func recurse
+	uncnd-jmp loop loop2 func recurse\
+	array
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -17,6 +18,7 @@ loop: build build/loop
 loop2: build build/loop2
 func: build build/func
 recurse: build build/recurse
+array: build build/array
 
 build:
 	mkdir build
@@ -67,6 +69,9 @@ build/func: src/09_04-func.s
 build/recurse: src/09_05-recurse.s
 	as -o build/recurse.o src/09_05-recurse.s
 	gcc -no-pie -o build/recurse build/recurse.o
+build/array: src/10_04-array.s
+	as -o build/array.o src/10_04-array.s
+	gcc -no-pie -o build/array build/array.o
 
 .PHONY: clean
 clean:
@@ -103,4 +108,7 @@ test-func:
 	build/func; echo $$?
 test-recurse:
 	build/recurse; echo $$?
+test-array:
+	build/array
+	build/array 21
 
