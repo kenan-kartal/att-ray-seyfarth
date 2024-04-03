@@ -26,7 +26,7 @@ main:
         leave
         ret
 fact:                           # recursive function
-.equ n, 8
+        .equ n, 8
         push %rbp
         mov %rsp,%rbp
         sub $16,%rsp            # make room for storing n
