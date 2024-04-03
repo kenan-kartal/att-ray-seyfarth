@@ -1,7 +1,7 @@
 all: exit numbers memory mov-reg add\
 	sub mult div cond-mov bit-ops\
 	uncnd-jmp loop loop2 func recurse\
-	array
+	array cl-param
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -19,6 +19,7 @@ loop2: build build/loop2
 func: build build/func
 recurse: build build/recurse
 array: build build/array
+cl-param: build build/cl-param
 
 build:
 	mkdir build
@@ -72,6 +73,9 @@ build/recurse: src/09_05-recurse.s
 build/array: src/10_04-array.s
 	as -o build/array.o src/10_04-array.s
 	gcc -no-pie -o build/array build/array.o
+build/cl-param: src/10_05-cl-param.s
+	as -o build/cl-param.o src/10_05-cl-param.s
+	gcc -no-pie -o build/cl-param build/cl-param.o
 
 .PHONY: clean
 clean:
@@ -111,4 +115,6 @@ test-recurse:
 test-array:
 	build/array
 	build/array 21
+test-cl-param:
+	build/cl-param a b c123
 
