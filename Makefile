@@ -1,7 +1,7 @@
 all: exit numbers memory mov-reg add\
 	sub mult div cond-mov bit-ops\
 	uncnd-jmp loop loop2 func recurse\
-	array cl-param
+	array cl-param float
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -20,6 +20,7 @@ func: build build/func
 recurse: build build/recurse
 array: build build/array
 cl-param: build build/cl-param
+float: build build/float.lst
 
 build:
 	mkdir build
@@ -76,6 +77,9 @@ build/array: src/10_04-array.s
 build/cl-param: src/10_05-cl-param.s
 	as -o build/cl-param.o src/10_05-cl-param.s
 	gcc -no-pie -o build/cl-param build/cl-param.o
+build/float.lst: src/11_09-float.s
+	as -al -o build/float.o src/11_09-float.s\
+		> build/float.lst
 
 .PHONY: clean
 clean:
@@ -117,4 +121,6 @@ test-array:
 	build/array 21
 test-cl-param:
 	build/cl-param a b c123
+test-float:
+	cat build/float.lst
 
