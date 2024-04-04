@@ -1,7 +1,7 @@
 all: exit numbers memory mov-reg add\
 	sub mult div cond-mov bit-ops\
 	uncnd-jmp loop loop2 func recurse\
-	array cl-param float
+	array cl-param float syscall-32
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -21,6 +21,7 @@ recurse: build build/recurse
 array: build build/array
 cl-param: build build/cl-param
 float: build build/float.lst
+syscall-32: build build/syscall-32
 
 build:
 	mkdir build
@@ -80,6 +81,9 @@ build/cl-param: src/10_05-cl-param.s
 build/float.lst: src/11_09-float.s
 	as -al -o build/float.o src/11_09-float.s\
 		> build/float.lst
+build/syscall-32: src/12_01-syscall-32.s
+	as -o build/syscall-32.o src/12_01-syscall-32.s
+	gcc -no-pie -o build/syscall-32 build/syscall-32.o
 
 .PHONY: clean
 clean:
@@ -123,4 +127,6 @@ test-cl-param:
 	build/cl-param a b c123
 test-float:
 	cat build/float.lst
+test-syscall-32:
+	build/syscall-32
 
