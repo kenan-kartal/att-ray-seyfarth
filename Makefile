@@ -2,7 +2,7 @@ all: exit numbers memory mov-reg add\
 	sub mult div cond-mov bit-ops\
 	uncnd-jmp loop loop2 func recurse\
 	array cl-param float syscall-32\
-	syscall c-wrap
+	syscall c-wrap struct
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -25,6 +25,7 @@ float: build build/float.lst
 syscall-32: build build/syscall-32
 syscall: build build/syscall
 c-wrap: build build/c-wrap
+struct: build build/struct
 
 build:
 	mkdir build
@@ -93,6 +94,9 @@ build/syscall: src/12_02-syscall.s
 build/c-wrap: src/12_03-c-wrap.s
 	as -o build/c-wrap.o src/12_03-c-wrap.s
 	gcc -no-pie -o build/c-wrap build/c-wrap.o
+build/struct: src/13_01-struct.s
+	as -o build/struct.o src/13_01-struct.s
+	gcc -no-pie -o build/struct build/struct.o
 
 .PHONY: clean
 clean:
@@ -142,4 +146,6 @@ test-syscall:
 	build/syscall
 test-c-wrap:
 	build/c-wrap
+test-struct:
+	build/struct; echo $$?
 
