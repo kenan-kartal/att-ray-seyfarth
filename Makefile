@@ -2,7 +2,8 @@ all: exit numbers memory mov-reg add\
 	sub mult div cond-mov bit-ops\
 	uncnd-jmp loop loop2 func recurse\
 	array cl-param float syscall-32\
-	syscall c-wrap struct stream
+	syscall c-wrap struct stream\
+	llist
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -27,6 +28,7 @@ syscall: build build/syscall
 c-wrap: build build/c-wrap
 struct: build build/struct
 stream: build build/stream.lst
+llist: build build/llist
 
 build:
 	mkdir build
@@ -101,6 +103,9 @@ build/struct: src/13_01-struct.s
 build/stream.lst: src/14-stream.s
 	as -al -o build/stream.o src/14-stream.s\
 		> build/stream.lst
+build/llist: src/15_01-llist.s
+	as -o build/llist.o src/15_01-llist.s
+	gcc -no-pie -o build/llist build/llist.o
 
 .PHONY: clean
 clean:
@@ -154,4 +159,6 @@ test-struct:
 	build/struct; echo $$?
 test-stream:
 	cat build/stream.lst
+test-llist:
+	build/llist
 
