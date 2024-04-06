@@ -4,7 +4,7 @@ all: exit numbers memory mov-reg add\
 	array cl-param float syscall-32\
 	syscall c-wrap struct stream\
 	llist dllist hash tree unroll\
-	popcnt-array
+	popcnt-array popcnt-array2
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -35,6 +35,7 @@ hash: build build/hash
 tree: build build/tree.lst
 unroll: build build/unroll.lst
 popcnt-array: build build/popcnt-array.lst
+popcnt-array2: build build/popcnt-array2.lst
 
 build:
 	mkdir build
@@ -127,6 +128,9 @@ build/unroll.lst: src/16_10-unroll.s
 build/popcnt-array.lst: src/17_02-popcnt-array.s
 	as -al -o build/popcnt-array.o src/17_02-popcnt-array.s\
 		> build/popcnt-array.lst
+build/popcnt-array2.lst: src/17_04-popcnt-array2.s
+	as -al -o build/popcnt-array2.o src/17_04-popcnt-array2.s\
+		> build/popcnt-array2.lst
 
 .PHONY: clean
 clean:
@@ -192,4 +196,6 @@ test-unroll:
 	cat build/unroll.lst
 test-popcnt-array:
 	cat build/popcnt-array.lst
+test-popcnt-array2:
+	cat build/popcnt-array2.lst
 
