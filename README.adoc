@@ -2,5 +2,9 @@
 
 This repository contains the AT&T syntax implementation of the Intel syntax x86-64 code
 from Ray Seyfarth's _Introduction to 64 Bit Intel Assembly Language Programming for Linux_ (2011).
+
+Source code is written in AT&T syntax for x86_64 ISA and GNU Assembler.
+Original code is written in Intel syntax for yasm.
+
 Make files for building and testing are included.
 
