@@ -44,6 +44,7 @@ popcnt_array:
         and $1,%r15w
         add %r15,%rdx
 
+.rept 15
         shr $1,%r8w
         mov %r8w,%r12w
         and $1,%r12w
@@ -60,6 +61,7 @@ popcnt_array:
         mov %r11w,%r15w
         and $1,%r15w
         add %r15,%rdx
+.endr
 
         add $8,%rdi
         dec %rsi
