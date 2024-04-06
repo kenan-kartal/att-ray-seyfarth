@@ -3,7 +3,7 @@ all: exit numbers memory mov-reg add\
 	uncnd-jmp loop loop2 func recurse\
 	array cl-param float syscall-32\
 	syscall c-wrap struct stream\
-	llist dllist hash tree
+	llist dllist hash tree unroll
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -32,6 +32,7 @@ llist: build build/llist
 dllist: build build/dllist.lst
 hash: build build/hash
 tree: build build/tree.lst
+unroll: build build/unroll.lst
 
 build:
 	mkdir build
@@ -118,6 +119,9 @@ build/hash: src/15_03-hash.s
 build/tree.lst: src/15_04-tree.s
 	as -al -o build/tree.o src/15_04-tree.s\
 		> build/tree.lst
+build/unroll.lst: src/16_10-unroll.s
+	as -al -o build/unroll.o src/16_10-unroll.s\
+		> build/unroll.lst
 
 .PHONY: clean
 clean:
@@ -179,4 +183,6 @@ test-hash:
 	build/hash
 test-tree:
 	cat build/tree.lst
+test-unroll:
+	cat build/unroll.lst
 
