@@ -4,7 +4,8 @@ all: exit numbers memory mov-reg add\
 	array cl-param float syscall-32\
 	syscall c-wrap struct stream\
 	llist dllist hash tree unroll\
-	popcnt-array popcnt-array2 sobel
+	popcnt-array popcnt-array2 sobel\
+	corr
 
 exit: build build/exit
 numbers: build build/numbers.lst
@@ -37,6 +38,7 @@ unroll: build build/unroll.lst
 popcnt-array: build build/popcnt-array.lst
 popcnt-array2: build build/popcnt-array2.lst
 sobel: build build/sobel.lst
+corr: build build/corr.lst
 
 build:
 	mkdir build
@@ -135,6 +137,9 @@ build/popcnt-array2.lst: src/17_04-popcnt-array2.s
 build/sobel.lst: src/18_02-sobel.s
 	as -al -o build/sobel.o src/18_02-sobel.s\
 		> build/sobel.lst
+build/corr.lst: src/19_02-corr.s
+	as -al -o build/corr.o src/19_02-corr.s\
+		> build/corr.lst
 
 .PHONY: clean
 clean:
@@ -204,4 +209,6 @@ test-popcnt-array2:
 	cat build/popcnt-array2.lst
 test-sobel:
 	cat build/sobel.lst
+test-corr:
+	cat build/corr.lst
 
